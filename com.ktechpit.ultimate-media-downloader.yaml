@@ -208,6 +208,9 @@ modules:
       
       - cp -rf hicolor/* ${FLATPAK_DEST}/share/icons/hicolor/
       - install -D hicolor/128x128/apps/com.ktechpit.ultimate-media-downloader.png ${FLATPAK_DEST}/share/app-info/icons/flatpak/128x128/com.ktechpit.ultimate-media-downloader.png
+      
+      - install -D hicolor/128x128/apps/com.ktechpit.ultimate-media-downloader.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/com.ktechpit.ultimate-media-downloader.png
+      
       - rm -r squashfs-root
     sources:
       - type: file
