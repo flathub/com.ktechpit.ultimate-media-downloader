@@ -14,14 +14,14 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --env=PACKAGE_TYPE=flatpak
-  
+
 tags:
   - proprietary
 
 cleanup:
   - /include
   - /lib/pkgconfig
-  
+
 modules:
   - name: lzo
     config-opts:
@@ -41,16 +41,15 @@ modules:
   - name: squashfs-tools
     buildsystem: simple
     build-commands:
-      - XZ_SUPPORT=1 LZO_SUPPORT=1 make -C squashfs-tools -j ${FLATPAK_BUILDER_N_JOBS} install INSTALL_DIR=${FLATPAK_DEST}/bin
+      - XZ_SUPPORT=1 LZO_SUPPORT=1 make -C squashfs-tools -j ${FLATPAK_BUILDER_N_JOBS}
+        install INSTALL_DIR=${FLATPAK_DEST}/bin
     cleanup:
       - '*'
     sources:
-    - type: git
-      url: https://github.com/plougher/squashfs-tools.git
-      tag: '4.5'
-      commit: '0496d7c3de3e09da37ba492081c86159806ebb07'
-      
-      
+      - type: git
+        url: https://github.com/plougher/squashfs-tools.git
+        tag: '4.5'
+        commit: 0496d7c3de3e09da37ba492081c86159806ebb07
   - name: libgumbo
     buildsystem: autotools
     sources:
@@ -62,12 +61,10 @@ modules:
       - /include
       - '*.a'
       - '*.la'
-      
-      
   - name: x264
     config-opts:
-      - '--disable-cli'
-      - '--enable-shared'
+      - --disable-cli
+      - --enable-shared
     sources:
       - type: git
         url: https://code.videolan.org/videolan/x264.git
@@ -79,19 +76,19 @@ modules:
     builddir: true
     subdir: source
     config-opts:
-      - '-DCMAKE_BUILD_TYPE=Release'
-      - '-DENABLE_CLI=OFF'
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DENABLE_CLI=OFF
     sources:
       - type: archive
         url: https://deb.debian.org/debian/pool/main/x/x265/x265_3.5.orig.tar.gz
         sha256: e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8
-      
-      
+
+
   - name: libass
     sources:
       - type: archive
-        url: https://github.com/libass/libass/releases/download/0.16.0/libass-0.16.0.tar.xz
-        sha256: 5dbde9e22339119cf8eed59eea6c623a0746ef5a90b689e68a090109078e3c08
+        url: https://github.com/libass/libass/releases/download/0.17.0/libass-0.17.0.tar.xz
+        sha256: 971e2e1db59d440f88516dcd1187108419a370e64863f70687da599fdf66cc1a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libass/libass/releases/latest
@@ -108,8 +105,6 @@ modules:
       - /share
       - '*.a'
       - '*.la'
-      
-          
   - name: luajit
     no-autogen: true
     make-install-args:
@@ -124,8 +119,8 @@ modules:
         url: https://github.com/LuaJIT/LuaJIT.git
         #branch: v2.1
         commit: 4c2441c16ce3c4e312aaefecc6d40c4fe21de97c
-      
-      
+
+
   - name: mpv
     buildsystem: simple
     build-commands:
@@ -143,8 +138,8 @@ modules:
           version-pattern: href="/mpv-player/mpv/archive/refs/tags/v(\d[\d.-]*)\.tar.gz"
           url-template: https://github.com/mpv-player/mpv/archive/v$version.tar.gz
       - type: file
-        url: https://waf.io/waf-2.0.24
-        sha256: 93909bca823a675f9f40af7c65b24887c3a3c0efdf411ff1978ba827194bdeb0
+        url: https://waf.io/waf-2.0.25
+        sha256: 21199cd220ccf60434133e1fd2ab8c8e5217c3799199c82722543970dc8e38d5
         dest-filename: waf
         x-checker-data:
           type: html
@@ -159,40 +154,40 @@ modules:
       - /include
       - /lib/pkgconfig
       - /share
-      
-      
+
+
   - name: ffmpeg
     config-opts:
-      - '--disable-debug'
-      - '--disable-doc'
-      - '--enable-rpath'
-      - '--enable-gpl'
-      - '--disable-static'
-      - '--enable-shared'
-      - '--enable-libfontconfig'
-      - '--enable-libfreetype'
-      - '--enable-libopus'
-      - '--enable-libpulse'
-      - '--enable-librsvg'
-      - '--enable-libvpx'
-      - '--enable-libdav1d'
-      - '--enable-libxml2'
-      - '--enable-libx264'
-      - '--enable-libx265'
-      - '--enable-libv4l2'
-      - '--enable-libmp3lame'
-      - '--enable-libass'
-      - '--enable-gnutls'
-      - '--enable-libvorbis'
-      - '--enable-libaom'
-      - '--enable-libopenjpeg'
+      - --disable-debug
+      - --disable-doc
+      - --enable-rpath
+      - --enable-gpl
+      - --disable-static
+      - --enable-shared
+      - --enable-libfontconfig
+      - --enable-libfreetype
+      - --enable-libopus
+      - --enable-libpulse
+      - --enable-librsvg
+      - --enable-libvpx
+      - --enable-libdav1d
+      - --enable-libxml2
+      - --enable-libx264
+      - --enable-libx265
+      - --enable-libv4l2
+      - --enable-libmp3lame
+      - --enable-libass
+      - --enable-gnutls
+      - --enable-libvorbis
+      - --enable-libaom
+      - --enable-libopenjpeg
     cleanup:
       - /share/ffmpeg/examples
     sources:
       - type: archive
         url: https://www.ffmpeg.org/releases/ffmpeg-4.4.1.tar.xz
         sha256: eadbad9e9ab30b25f5520fbfde99fae4a92a1ae3c0257a8d68569a4651e30e02
-        
+
 
   - name: ultimate-media-downloader
     buildsystem: simple
@@ -202,8 +197,10 @@ modules:
       - install -d ${FLATPAK_DEST}/lib
       - mv squashfs-root/usr/lib/* ${FLATPAK_DEST}/lib/
       - install -Dm644 squashfs-root/meta/gui/icon.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.ktechpit.ultimate-media-downloader.png
-      - install -Dm644 squashfs-root/usr/share/applications/ultimate-media-downloader.desktop ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
-      - desktop-file-edit --set-icon=${FLATPAK_ID}  --set-comment="Download Media from Internet" ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
+      - install -Dm644 squashfs-root/usr/share/applications/ultimate-media-downloader.desktop
+        ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
+      - desktop-file-edit --set-icon=${FLATPAK_ID}  --set-comment="Download Media
+        from Internet" ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
       - install -Dm644 com.ktechpit.ultimate-media-downloader.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml
       - cp -r hicolor/* ${FLATPAK_DEST}/share/icons/hicolor/
     sources:
