@@ -49,5 +49,10 @@
       <p>Stable release</p>
     </description>
   </release>
+  <release version="4.4" date="2023-01-09" type="stable" urgency="high">
+    <description>
+      <p>Stable release 4.4 revision 30</p>
+    </description>
+  </release>
   </releases>
 </component>
