@@ -14,14 +14,14 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --env=PACKAGE_TYPE=flatpak
-  
+
 tags:
   - proprietary
 
 cleanup:
   - /include
   - /lib/pkgconfig
-  
+
 modules:
   - name: lzo
     config-opts:
@@ -49,8 +49,8 @@ modules:
       url: https://github.com/plougher/squashfs-tools.git
       tag: '4.5'
       commit: '0496d7c3de3e09da37ba492081c86159806ebb07'
-      
-      
+
+
   - name: libgumbo
     buildsystem: autotools
     sources:
@@ -62,8 +62,8 @@ modules:
       - /include
       - '*.a'
       - '*.la'
-      
-      
+
+
   - name: x264
     config-opts:
       - '--disable-cli'
@@ -85,8 +85,8 @@ modules:
       - type: archive
         url: https://deb.debian.org/debian/pool/main/x/x265/x265_3.5.orig.tar.gz
         sha256: e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8
-      
-      
+
+
   - name: libass
     sources:
       - type: archive
@@ -108,8 +108,8 @@ modules:
       - /share
       - '*.a'
       - '*.la'
-      
-          
+
+
   - name: luajit
     no-autogen: true
     make-install-args:
@@ -124,8 +124,8 @@ modules:
         url: https://github.com/LuaJIT/LuaJIT.git
         #branch: v2.1
         commit: 4c2441c16ce3c4e312aaefecc6d40c4fe21de97c
-      
-      
+
+
   - name: mpv
     buildsystem: simple
     build-commands:
@@ -159,8 +159,8 @@ modules:
       - /include
       - /lib/pkgconfig
       - /share
-      
-      
+
+
   - name: ffmpeg
     config-opts:
       - '--disable-debug'
@@ -192,12 +192,12 @@ modules:
       - type: archive
         url: https://www.ffmpeg.org/releases/ffmpeg-4.4.1.tar.xz
         sha256: eadbad9e9ab30b25f5520fbfde99fae4a92a1ae3c0257a8d68569a4651e30e02
-        
+
 
   - name: ultimate-media-downloader
     buildsystem: simple
     build-commands:
-      - unsquashfs -no-progress mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_25.snap
+      - unsquashfs -no-progress mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_30.snap
       - install -Dm755 squashfs-root/usr/bin/ultimate-media-downloader ${FLATPAK_DEST}/bin/ultimate-media-downloader
       - install -d ${FLATPAK_DEST}/lib
       - mv squashfs-root/usr/lib/* ${FLATPAK_DEST}/lib/
@@ -214,7 +214,7 @@ modules:
       - type: file
         # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
         # also update build-command whenever update url
-        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_25.snap
+        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_30.snap
         only-arches:
           - x86_64
-        sha256: 75e5939e3a0d192ef5d8f097360399ee5d2e71f079566ded16cbdfd644ee2003
+        sha256: fc0faab822e44911cce1544b8f91939f97bbabc6cf2c8186cf6715a89624fce6
