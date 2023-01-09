@@ -44,14 +44,14 @@
   <launchable type="desktop-id">com.ktechpit.ultimate-media-downloader.desktop</launchable>
    <content_rating type="oars-1.1" />
   <releases>
-  <release version="4.3" date="2022-09-05" type="stable" urgency="high">
-    <description>
-      <p>Stable release</p>
-    </description>
-  </release>
   <release version="4.4" date="2023-01-09" type="stable" urgency="high">
     <description>
       <p>Stable release 4.4 revision 30</p>
+    </description>
+  </release>
+  <release version="4.3" date="2022-09-05" type="stable" urgency="high">
+    <description>
+      <p>Stable release</p>
     </description>
   </release>
   </releases>
