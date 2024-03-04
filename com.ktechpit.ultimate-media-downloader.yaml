@@ -153,7 +153,7 @@ modules:
   - name: ultimate-media-downloader
     buildsystem: simple
     build-commands:
-      - unsquashfs -no-progress mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_30.snap
+      - unsquashfs -no-progress mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW*.snap
       - install -Dm755 squashfs-root/usr/bin/ultimate-media-downloader ${FLATPAK_DEST}/bin/ultimate-media-downloader
       - install -d ${FLATPAK_DEST}/lib
       - mv squashfs-root/usr/lib/* ${FLATPAK_DEST}/lib/
@@ -170,7 +170,8 @@ modules:
       - type: file
         # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
         # also update build-command whenever update url
-        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_30.snap
+        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_32.snap
         only-arches:
           - x86_64
-        sha256: fc0faab822e44911cce1544b8f91939f97bbabc6cf2c8186cf6715a89624fce6
+        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_32.snap | sha256sum
+        sha256: a7e2a442d359c5c1d25840d81996122913d92ec7d8014f7e73b41e34e11db9b1
