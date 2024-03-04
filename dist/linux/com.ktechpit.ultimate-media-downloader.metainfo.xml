@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2022 Keshav Bhatt <keshavnrj@gmail.com> -->
+<!-- appstreamcli validate com.ktechpit.ultimate-media-downloader.metainfo.xml -->
 <component type="desktop">
   <id>com.ktechpit.ultimate-media-downloader</id>
   <metadata_license>CC0-1.0</metadata_license>
@@ -11,17 +12,53 @@
     <p>Ultimate media downloader for Linux allows downloading Video/Audio from 100s of websites on the internet. It allows saving media from websites on Linux Desktop. Ultimate media downloader for Linux works with many sites including Youtube, Facebook, Instagram, Twitter, TikTok, Snapchat, etc</p>
     <p>Key features of Ultimate Media downloader:</p>
     <ul>
-    <li>Comes with easy to use Basic Downloader</li>
-    <li>1300+ supported websites</li>
-    <li>Direct Youtube Video and Audio only Playback with internal player without Ads</li>
-    <li>Youtube Video and Playlist search to download media in bulk</li>
-    <li>Batch media Downloader to download media in bulk</li>
-    <li>Playlist Downloader allows downloading whole playlists</li>
-    <li>Download Library Manager manage and interact with downloaded media</li>
-    <li>Dark Theme supports out of the box</li>
-    <li>Widget style switcher Adwaita, Adwaita Dark, and Fusion widget styles</li>
+      <li>Comes with easy to use Basic Downloader</li>
+      <li>1300+ supported websites</li>
+      <li>Direct Youtube Video and Audio only Playback with internal player without Ads</li>
+      <li>Youtube Video and Playlist search to download media in bulk</li>
+      <li>Batch media Downloader to download media in bulk</li>
+      <li>Playlist Downloader allows downloading whole playlists</li>
+      <li>Download Library Manager manage and interact with downloaded media</li>
+      <li>Dark Theme supports out of the box</li>
+      <li>Widget style switcher Adwaita, Adwaita Dark, and Fusion widget styles</li>
     </ul>
   </description>
+  <keywords>
+    <keyword>4k video downloader</keyword>
+    <keyword>4ktube</keyword>
+    <keyword>addoncrop</keyword>
+    <keyword>all file downloader</keyword>
+    <keyword>allavsoft</keyword>
+    <keyword>bitdownloader</keyword>
+    <keyword>clipgrab</keyword>
+    <keyword>facebook downloader</keyword>
+    <keyword>firefox</keyword>
+    <keyword>hitomi downloader</keyword>
+    <keyword>instagram downloader</keyword>
+    <keyword>itubego</keyword>
+    <keyword>keepvid</keyword>
+    <keyword>ktube</keyword>
+    <keyword>mp3 downloader</keyword>
+    <keyword>music downloader</keyword>
+    <keyword>playlist downloader</keyword>
+    <keyword>redtube</keyword>
+    <keyword>shots downloader</keyword>
+    <keyword>snap downloader</keyword>
+    <keyword>snaptube</keyword>
+    <keyword>tiktok</keyword>
+    <keyword>utube</keyword>
+    <keyword>video downloader</keyword>
+    <keyword>videodownloader</keyword>
+    <keyword>videohunter</keyword>
+    <keyword>y2mate</keyword>
+    <keyword>youtube download</keyword>
+    <keyword>youtube music</keyword>
+    <keyword>youtube to mp3</keyword>
+    <keyword>youtube-dl</keyword>
+    <keyword>youtubedl</keyword>
+    <keyword>ytdlp</keyword>
+    <keyword>ytdownloaderplus</keyword>
+  </keywords>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/1.jpeg</image>
@@ -40,10 +77,17 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/keshavbhatt/ultimate-media-download-linux</url>
+  <url type="bugtracker">https://github.com/keshavbhatt/ultimate-media-downloader-linux/issues</url>
+  <url type="donation">https://www.paypal.me/keshavnrj/10</url>
   <update_contact>98378sub@gmail.com</update_contact>
   <launchable type="desktop-id">com.ktechpit.ultimate-media-downloader.desktop</launchable>
    <content_rating type="oars-1.1" />
   <releases>
+  <release version="5.0" date="2024-03-04" type="stable" urgency="high">
+    <description>
+      <p>Stable release 5.0 revision 32</p>
+    </description>
+  </release>
   <release version="4.4" date="2023-01-09" type="stable" urgency="high">
     <description>
       <p>Stable release 4.4 revision 30</p>
