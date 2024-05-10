@@ -175,4 +175,4 @@ modules:
           - x86_64
         # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_32.snap | sha256sum
         sha256: a7e2a442d359c5c1d25840d81996122913d92ec7d8014f7e73b41e34e11db9b1
-#END 2024-03-17
+#END 2024-05-10
