@@ -2,32 +2,52 @@ app-id: com.ktechpit.ultimate-media-downloader
 runtime: org.kde.Platform
 runtime-version: 5.15-23.08
 sdk: org.kde.Sdk
+base: io.qt.qtwebengine.BaseApp
+base-version: 5.15-23.08
 command: ultimate-media-downloader
 finish-args:
-  - --share=network
-  - --share=ipc
-  - --socket=fallback-x11
-  - --socket=wayland
+  - --device=dri
+
+  - --filesystem=xdg-desktop
+  - --filesystem=xdg-documents
   - --filesystem=xdg-download
+  - --filesystem=xdg-music
   - --filesystem=xdg-pictures
   - --filesystem=xdg-videos
-  - --device=dri
+
+  - --share=network
+  - --share=ipc
+
   - --socket=pulseaudio
+  - --socket=fallback-x11
+  - --socket=wayland
+
   - --env=PACKAGE_TYPE=flatpak
+  - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
+  - --env=QTWEBENGINE_DICTIONARIES_PATH=/app/qtwebengine_dictionaries
+
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=com.canonical.indicator.application
+  - --talk-name=org.ayatana.indicator.application
+
+  - --system-talk-name=org.freedesktop.GeoClue2
+  - --system-talk-name=org.freedesktop.UPower.*
+
+cleanup-commands:
+  - mkdir -p /app/lib/ffmpeg
+  - /app/cleanup-BaseApp.sh
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+
 add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
     directory: 'lib/ffmpeg'
     version: '23.08'
     add-ld-path: '.'
     autodelete: false
-cleanup-commands:
-  - mkdir -p /app/lib/ffmpeg
-tags:
-  - proprietary
-
-cleanup:
-  - /include
-  - /lib/pkgconfig
 
 modules:
   - name: lzo
@@ -44,7 +64,6 @@ modules:
         url: http://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz
         sha256: c0f892943208266f9b6543b3ae308fab6284c5c90e627931446fb49b4221a072
 
-
   - name: squashfs-tools
     buildsystem: simple
     build-commands:
@@ -56,7 +75,6 @@ modules:
       url: https://github.com/plougher/squashfs-tools.git
       tag: '4.5'
       commit: '0496d7c3de3e09da37ba492081c86159806ebb07'
-
 
   - name: libgumbo
     buildsystem: autotools
@@ -70,7 +88,6 @@ modules:
       - '*.a'
       - '*.la'
 
-
   - name: x264
     config-opts:
       - '--disable-cli'
@@ -79,7 +96,6 @@ modules:
       - type: git
         url: https://code.videolan.org/videolan/x264.git
         commit: 5db6aa6cab1b146e07b60cc1736a01f21da01154
-
 
   - name: x265
     buildsystem: cmake-ninja
@@ -92,7 +108,6 @@ modules:
       - type: archive
         url: https://deb.debian.org/debian/pool/main/x/x265/x265_3.5.orig.tar.gz
         sha256: e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8
-
 
   - name: libass
     sources:
@@ -110,7 +125,6 @@ modules:
       - '*.a'
       - '*.la'
 
-
   - name: luajit
     no-autogen: true
     make-install-args:
@@ -125,7 +139,6 @@ modules:
         url: https://github.com/LuaJIT/LuaJIT.git
         #branch: v2.1
         commit: 4c2441c16ce3c4e312aaefecc6d40c4fe21de97c
-
 
   - name: mpv
     buildsystem: simple
@@ -150,13 +163,14 @@ modules:
       - /include
       - /lib/pkgconfig
       - /share
+
   - name: ultimate-media-downloader
     buildsystem: simple
     build-commands:
       - unsquashfs -no-progress mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW*.snap
       - install -Dm755 squashfs-root/usr/bin/ultimate-media-downloader ${FLATPAK_DEST}/bin/ultimate-media-downloader
       - install -d ${FLATPAK_DEST}/lib
-      - mv squashfs-root/usr/lib/* ${FLATPAK_DEST}/lib/
+      - cp -r squashfs-root/usr/lib/* ${FLATPAK_DEST}/lib/
       - install -Dm644 squashfs-root/meta/gui/icon.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.ktechpit.ultimate-media-downloader.png
       - install -Dm644 squashfs-root/usr/share/applications/ultimate-media-downloader.desktop ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
       - desktop-file-edit --set-icon=${FLATPAK_ID}  --set-comment="Download Media from Internet" ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
@@ -170,9 +184,9 @@ modules:
       - type: file
         # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
         # also update build-command whenever update url
-        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_35.snap
+        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_39.snap
         only-arches:
           - x86_64
-        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_34.snap | sha256sum
-        sha256: d41ad5abc92f576ecef75a599af20f13baa0dedf27f3599029a8b9c5cd683ea2
+        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_39.snap | sha256sum
+        sha256: 5773b79cd607b65d169cc6280a8b91c0d4c97b9e48811c8fcc6685785d1cebaa
 #END 2024-05-10
