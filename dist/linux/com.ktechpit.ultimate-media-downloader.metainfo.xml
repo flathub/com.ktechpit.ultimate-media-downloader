@@ -5,20 +5,24 @@
   <id>com.ktechpit.ultimate-media-downloader</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-or-later</project_license>
-
   <developer_name>Keshav Bhatt</developer_name>
   <name>Ultimate Media Downloader</name>
-  <summary>Online video &amp; audio downloader for Linux, 1300+ websites support</summary>
+  <summary>Online video &amp; audio downloader for Linux, 1400+ websites support</summary>
+  <branding>
+    <color type="primary" scheme_preference="light">#78add2</color>
+    <color type="primary" scheme_preference="dark">#00273e</color>
+  </branding>
   <description>
-    <p>Ultimate media downloader for Linux allows downloading Video/Audio from 100s of websites on the internet. It allows saving media from websites on Linux Desktop. Ultimate media downloader for Linux works with many sites including Youtube, Facebook, Instagram, Twitter, TikTok, Snapchat, etc</p>
+    <p>Ultimate media downloader for Linux allows downloading Video/Audio from thousands of websites on the internet. It allows saving media from websites on Linux Desktop. Ultimate media downloader for Linux works with many sites including Youtube, Facebook, Instagram, Twitter, TikTok, Snapchat, etc</p>
     <p>Key features of Ultimate Media downloader:</p>
     <ul>
       <li>Comes with easy to use Basic Downloader</li>
-      <li>1300+ supported websites</li>
+      <li>1400+ supported websites</li>
       <li>Direct Youtube Video and Audio only Playback with internal player without Ads</li>
       <li>Youtube Video and Playlist search to download media in bulk</li>
       <li>Batch media Downloader to download media in bulk</li>
       <li>Playlist Downloader allows downloading whole playlists</li>
+      <li>Built-In Web browser, allows session sharing with download engine</li>
       <li>Download Library Manager manage and interact with downloaded media</li>
       <li>Dark Theme supports out of the box</li>
       <li>Widget style switcher Adwaita, Adwaita Dark, and Fusion widget styles</li>
@@ -78,30 +82,19 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/keshavbhatt/ultimate-media-download-linux</url>
-  <url type="bugtracker">https://github.com/keshavbhatt/ultimate-media-downloader-linux/issues</url>
-  <url type="donation">https://www.paypal.me/keshavnrj/10</url>
+  <url type="donation">https://www.paypal.me/keshavnrj/5</url>
   <update_contact>98378sub@gmail.com</update_contact>
   <launchable type="desktop-id">com.ktechpit.ultimate-media-downloader.desktop</launchable>
    <content_rating type="oars-1.1" />
   <releases>
+  <release version="5.2" date="2024-09-13" type="stable" urgency="high">
+    <description>
+      <p>Stable release 5.2 revision 39</p>
+    </description>
+  </release>
   <release version="5.1" date="2024-08-24" type="stable" urgency="high">
     <description>
       <p>Stable release 5.1 revision 35</p>
-    </description>
-  </release>
-  <release version="5.0" date="2024-03-04" type="stable" urgency="high">
-    <description>
-      <p>Stable release 5.0 revision 32</p>
-    </description>
-  </release>
-  <release version="4.4" date="2023-01-09" type="stable" urgency="high">
-    <description>
-      <p>Stable release 4.4 revision 30</p>
-    </description>
-  </release>
-  <release version="4.3" date="2022-09-05" type="stable" urgency="high">
-    <description>
-      <p>Stable release</p>
     </description>
   </release>
   </releases>
