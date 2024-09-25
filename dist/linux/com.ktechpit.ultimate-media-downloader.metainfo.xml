@@ -22,7 +22,7 @@
       <li>Youtube Video and Playlist search to download media in bulk</li>
       <li>Batch media Downloader to download media in bulk</li>
       <li>Playlist Downloader allows downloading whole playlists</li>
-      <li>Built-In Web browser, allows session sharing with download engine</li>
+      <li>Built-In Web browser with AdBlocker, allows session sharing with download engine</li>
       <li>Download Library Manager manage and interact with downloaded media</li>
       <li>Dark Theme supports out of the box</li>
       <li>Widget style switcher Adwaita, Adwaita Dark, and Fusion widget styles</li>
@@ -52,6 +52,12 @@
     <keyword>snaptube</keyword>
     <keyword>tiktok</keyword>
     <keyword>utube</keyword>
+    <keyword>tiktok downloader</keyword>
+    <keyword>youtube shots downloader</keyword>
+    <keyword>rumble video downloader</keyword>
+    <keyword>snapchat downloader</keyword>
+    <keyword>linkedin video downloader</keyword>
+    <keyword>soundcloud downloader</keyword>
     <keyword>video downloader</keyword>
     <keyword>videodownloader</keyword>
     <keyword>videohunter</keyword>
@@ -63,7 +69,7 @@
     <keyword>youtubedl</keyword>
     <keyword>ytdlp</keyword>
     <keyword>ytdownloaderplus</keyword>
-  </keywords>
+</keywords>
   <screenshots>
       <screenshot type="default">
           <caption>Youtube Video Search</caption>
@@ -105,6 +111,12 @@
   <launchable type="desktop-id">com.ktechpit.ultimate-media-downloader.desktop</launchable>
    <content_rating type="oars-1.1" />
   <releases>
+  <release version="5.3" date="2024-09-26" type="stable" urgency="high">
+    <description>
+      <p>Stable release 5.3 revision 39</p>
+      <p>AdBlock for built-in web browser</p>
+    </description>
+  </release>
   <release version="5.2" date="2024-09-13" type="stable" urgency="high">
     <description>
       <p>Stable release 5.2 revision 39</p>
