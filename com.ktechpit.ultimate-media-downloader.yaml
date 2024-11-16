@@ -184,9 +184,9 @@ modules:
       - type: file
         # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
         # also update build-command whenever update url
-        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_41.snap
+        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_43.snap
         only-arches:
           - x86_64
-        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_41.snap | sha256sum
-        sha256: 886e25d0f777589c98204715a0b2694bb2b19c3f404d27214f04e846dd5a9596
+        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_43.snap | sha256sum
+        sha256: da6ce4e85524f2d42c0d7e06eeefdb6b444485091f02fb6615d2afdd31af2d10
 #END 2024-09-26
