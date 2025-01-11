@@ -117,6 +117,12 @@
       <p>fix issues with youtube plug-in</p>
     </description>
   </release>
+  <release version="5.4" date="2024-11-17" type="stable" urgency="high">
+    <description>
+      <p>Stable release 5.4 revision 43</p>
+      <p>Fix File too long issue while downloading files with long names.</p>
+    </description>
+  </release>
   <release version="5.3" date="2024-09-26" type="stable" urgency="high">
     <description>
       <p>Stable release 5.3 revision 39</p>
