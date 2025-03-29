@@ -69,75 +69,81 @@
     <keyword>youtubedl</keyword>
     <keyword>ytdlp</keyword>
     <keyword>ytdownloaderplus</keyword>
-</keywords>
+  </keywords>
   <screenshots>
-      <screenshot type="default">
-          <caption>Youtube Video Search</caption>
-          <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/1.jpeg?raw=true</image>
-      </screenshot>
-      <screenshot>
-          <caption>Application Settings</caption>
-          <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/2.jpeg?raw=true</image>
-      </screenshot>
-      <screenshot>
-          <caption>Youtube Playlist Search</caption>
-          <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/3.jpeg?raw=true</image>
-      </screenshot>
-      <screenshot>
-          <caption>Youtube browser</caption>
-          <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/4.jpeg?raw=true</image>
-      </screenshot>
-      <screenshot>
-          <caption>Format selection</caption>
-          <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/5.jpeg?raw=true</image>
-      </screenshot>
-      <screenshot>
-          <caption>Media Library</caption>
-          <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/6.jpeg?raw=true</image>
-      </screenshot>
-      <screenshot>
-          <caption>Built-in Web Browser</caption>
-          <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/8.jpeg?raw=true</image>
-      </screenshot>
-      <screenshot>
-          <caption>About Application</caption>
-          <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/7.jpeg?raw=true</image>
-      </screenshot>
+    <screenshot type="default">
+      <caption>Youtube Video Search</caption>
+      <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/1.jpeg?raw=true</image>
+    </screenshot>
+    <screenshot>
+      <caption>Application Settings</caption>
+      <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/2.jpeg?raw=true</image>
+    </screenshot>
+    <screenshot>
+      <caption>Youtube Playlist Search</caption>
+      <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/3.jpeg?raw=true</image>
+    </screenshot>
+    <screenshot>
+      <caption>Youtube browser</caption>
+      <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/4.jpeg?raw=true</image>
+    </screenshot>
+    <screenshot>
+      <caption>Format selection</caption>
+      <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/5.jpeg?raw=true</image>
+    </screenshot>
+    <screenshot>
+      <caption>Media Library</caption>
+      <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/6.jpeg?raw=true</image>
+    </screenshot>
+    <screenshot>
+      <caption>Built-in Web Browser</caption>
+      <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/8.jpeg?raw=true</image>
+    </screenshot>
+    <screenshot>
+      <caption>About Application</caption>
+      <image>https://raw.githubusercontent.com/keshavbhatt/ultimate-media-download-linux/main/images/7.jpeg?raw=true</image>
+    </screenshot>
   </screenshots>
-
   <url type="homepage">https://github.com/keshavbhatt/ultimate-media-download-linux</url>
   <url type="donation">https://www.paypal.me/keshavnrj/5</url>
   <update_contact>98378sub@gmail.com</update_contact>
   <launchable type="desktop-id">com.ktechpit.ultimate-media-downloader.desktop</launchable>
-   <content_rating type="oars-1.1" />
+  <content_rating type="oars-1.1"/>
   <releases>
-  <release version="5.5" date="2025-01-11" type="stable" urgency="high">
-    <description>
-      <p>Stable release 5.5 revision 44</p>
-      <p>fix issues with youtube plug-in</p>
-    </description>
-  </release>
-  <release version="5.4" date="2024-11-17" type="stable" urgency="high">
-    <description>
-      <p>Stable release 5.4 revision 43</p>
-      <p>Fix File too long issue while downloading files with long names.</p>
-    </description>
-  </release>
-  <release version="5.3" date="2024-09-26" type="stable" urgency="high">
-    <description>
-      <p>Stable release 5.3 revision 39</p>
-      <p>AdBlock for built-in web browser</p>
-    </description>
-  </release>
-  <release version="5.2" date="2024-09-13" type="stable" urgency="high">
-    <description>
-      <p>Stable release 5.2 revision 39</p>
-    </description>
-  </release>
-  <release version="5.1" date="2024-08-24" type="stable" urgency="high">
-    <description>
-      <p>Stable release 5.1 revision 35</p>
-    </description>
-  </release>
+    <release version="5.6" date="2025-03-29" type="stable" urgency="high">
+      <description>
+        <p>Stable release 5.7 revision 45</p>
+        <p>- fix issue with browser where user not able to login to google account</p>
+        <p>- allow browser UserAgent overriding, Browser -&gt; UserAgent -&gt; Change UserAgent menu item</p>
+      </description>
+    </release>
+    <release version="5.5" date="2025-01-11" type="stable" urgency="high">
+      <description>
+        <p>Stable release 5.5 revision 44</p>
+        <p>fix issues with youtube plug-in</p>
+      </description>
+    </release>
+    <release version="5.4" date="2024-11-17" type="stable" urgency="high">
+      <description>
+        <p>Stable release 5.4 revision 43</p>
+        <p>Fix File too long issue while downloading files with long names.</p>
+      </description>
+    </release>
+    <release version="5.3" date="2024-09-26" type="stable" urgency="high">
+      <description>
+        <p>Stable release 5.3 revision 39</p>
+        <p>AdBlock for built-in web browser</p>
+      </description>
+    </release>
+    <release version="5.2" date="2024-09-13" type="stable" urgency="high">
+      <description>
+        <p>Stable release 5.2 revision 39</p>
+      </description>
+    </release>
+    <release version="5.1" date="2024-08-24" type="stable" urgency="high">
+      <description>
+        <p>Stable release 5.1 revision 35</p>
+      </description>
+    </release>
   </releases>
 </component>
