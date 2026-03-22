@@ -155,7 +155,7 @@ modules:
     sources:
       - type: file
         path: dist/linux/com.ktechpit.ultimate-media-downloader.metainfo.xml
-      - type: dir
+      - type: file
         path: dist/linux/
       - type: file
         # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
