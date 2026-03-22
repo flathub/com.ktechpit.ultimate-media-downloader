@@ -1,9 +1,9 @@
 app-id: com.ktechpit.ultimate-media-downloader
 runtime: org.kde.Platform
-runtime-version: 5.15-23.08
+runtime-version: 5.15-25.08
 sdk: org.kde.Sdk
 base: io.qt.qtwebengine.BaseApp
-base-version: 5.15-23.08
+base-version: 5.15-25.08
 command: ultimate-media-downloader
 finish-args:
   - --device=dri
@@ -50,31 +50,8 @@ add-extensions:
     autodelete: false
 
 modules:
-  - name: lzo
-    config-opts:
-      - --enable-shared
-      - --disable-static
-    cleanup:
-      - /include
-      - /share/doc
-      - '*.la'
-      - /lib/*.so
-    sources:
-      - type: archive
-        url: http://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz
-        sha256: c0f892943208266f9b6543b3ae308fab6284c5c90e627931446fb49b4221a072
-
-  - name: squashfs-tools
-    buildsystem: simple
-    build-commands:
-      - XZ_SUPPORT=1 LZO_SUPPORT=1 make -C squashfs-tools -j ${FLATPAK_BUILDER_N_JOBS} install INSTALL_DIR=${FLATPAK_DEST}/bin
-    cleanup:
-      - '*'
-    sources:
-    - type: git
-      url: https://github.com/plougher/squashfs-tools.git
-      tag: '4.5'
-      commit: '0496d7c3de3e09da37ba492081c86159806ebb07'
+  - shared-modules/squashfs-tools/squashfs-tools.json
+  - modules/mpv.yaml
 
   - name: libgumbo
     buildsystem: autotools
@@ -88,105 +65,23 @@ modules:
       - '*.a'
       - '*.la'
 
-  - name: x264
-    config-opts:
-      - '--disable-cli'
-      - '--enable-shared'
-    sources:
-      - type: git
-        url: https://code.videolan.org/videolan/x264.git
-        commit: 5db6aa6cab1b146e07b60cc1736a01f21da01154
-
-  - name: x265
-    buildsystem: cmake-ninja
-    builddir: true
-    subdir: source
-    config-opts:
-      - '-DCMAKE_BUILD_TYPE=Release'
-      - '-DENABLE_CLI=OFF'
-    sources:
-      - type: archive
-        url: https://deb.debian.org/debian/pool/main/x/x265/x265_3.5.orig.tar.gz
-        sha256: e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8
-
-  - name: libass
-    sources:
-      - type: archive
-        url: https://github.com/libass/libass/releases/download/0.16.0/libass-0.16.0.tar.xz
-        sha256: 5dbde9e22339119cf8eed59eea6c623a0746ef5a90b689e68a090109078e3c08
-      - type: script
-        commands:
-          - autoreconf -fiv
-        dest-filename: autogen.sh
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /share
-      - '*.a'
-      - '*.la'
-
-  - name: luajit
-    no-autogen: true
-    make-install-args:
-      - PREFIX=${FLATPAK_DEST}
-    cleanup:
-      - /bin
-      - /include
-      - /lib/pkgconfig
-      - /share/man
-    sources:
-      - type: git
-        url: https://github.com/LuaJIT/LuaJIT.git
-        #branch: v2.1
-        commit: 4c2441c16ce3c4e312aaefecc6d40c4fe21de97c
-
-  - name: mpv
-    buildsystem: simple
-    build-commands:
-      - python3 waf configure --disable-alsa --disable-build-date --disable-manpage-build
-        --prefix=/app
-      - python3 waf build
-      - python3 waf install
-    sources:
-      - type: archive
-        url: https://github.com/mpv-player/mpv/archive/v0.36.0.tar.gz
-        sha256: 29abc44f8ebee013bb2f9fe14d80b30db19b534c679056e4851ceadf5a5e8bf6
-      - type: file
-        url: https://waf.io/waf-2.0.24
-        sha256: 93909bca823a675f9f40af7c65b24887c3a3c0efdf411ff1978ba827194bdeb0
-        dest-filename: waf
-    post-install:
-      - mkdir -p /app/etc/mpv/
-      # save screenshots at ~/Pictures/mpv-screenshots
-      - echo "screenshot-directory=~/Pictures/UMD4-MPV-screenshots" > /app/etc/mpv/mpv.conf
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /share
-
   - name: ultimate-media-downloader
     buildsystem: simple
     build-commands:
       - unsquashfs -no-progress mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW*.snap
       - install -Dm755 squashfs-root/usr/bin/ultimate-media-downloader ${FLATPAK_DEST}/bin/ultimate-media-downloader
-      - install -d ${FLATPAK_DEST}/lib
-      - cp -r squashfs-root/usr/lib/* ${FLATPAK_DEST}/lib/
       - install -Dm644 squashfs-root/meta/gui/icon.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.ktechpit.ultimate-media-downloader.png
       - install -Dm644 squashfs-root/usr/share/applications/ultimate-media-downloader.desktop ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
       - desktop-file-edit --set-icon=${FLATPAK_ID}  --set-comment="Download Media from Internet" ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
       - install -Dm644 com.ktechpit.ultimate-media-downloader.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml
-      - cp -r hicolor/* ${FLATPAK_DEST}/share/icons/hicolor/
     sources:
       - type: file
         path: dist/linux/com.ktechpit.ultimate-media-downloader.metainfo.xml
-      - type: dir
-        path: dist/linux/
       - type: file
         # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
         # also update build-command whenever update url
-        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_45.snap
+        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_51.snap
         only-arches:
           - x86_64
-        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_45.snap | sha256sum
-        sha256: acb84eedf22d01bb9fbf35c5f7f930d44e0df4e73c15aa63db89ca9986c43071
-#END 2024-09-26
+        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_51.snap | sha256sum
+        sha256: ec646d39ced76d2a598426841580206a91cda7ebe7fc3e4b601f8035955c9c5a
