@@ -64,28 +64,6 @@ modules:
       - '*.a'
       - '*.la'
 
-  - name: x264
-    config-opts:
-      - '--disable-cli'
-      - '--enable-shared'
-    sources:
-      - type: git
-        url: https://code.videolan.org/videolan/x264.git
-        commit: 5db6aa6cab1b146e07b60cc1736a01f21da01154
-
-  - name: x265
-    buildsystem: cmake-ninja
-    builddir: true
-    subdir: source
-    config-opts:
-      - '-DCMAKE_POLICY_VERSION_MINIMUM=3.5'
-      - '-DCMAKE_BUILD_TYPE=Release'
-      - '-DENABLE_CLI=OFF'
-    sources:
-      - type: archive
-        url: https://deb.debian.org/debian/pool/main/x/x265/x265_3.5.orig.tar.gz
-        sha256: e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8
-
   - name: libass
     sources:
       - type: archive
@@ -101,7 +79,52 @@ modules:
       - /share
       - '*.a'
       - '*.la'
+  - name: x264
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+    config-opts:
+      - --disable-cli
+      - --enable-shared
+    sources:
+      - type: git
+        url: https://code.videolan.org/videolan/x264.git
+        commit: b35605ace3ddf7c1a5d67a2eb553f034aef41d55
+        # Every commit to the stable branch is considered a release
+        # https://code.videolan.org/videolan/x264/-/issues/35
+        x-checker-data:
+          type: json
+          url: https://code.videolan.org/api/v4/projects/536/repository/branches/stable
+          commit-query: .commit.id
+          version-query: .commit.short_id
+          timestamp-query: .commit.created_at
 
+  - name: x265
+    buildsystem: cmake
+    subdir: source
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DBUILD_STATIC=0
+      # TODO can be removed when updating to x265 > 4.1
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+    sources:
+      - type: git
+        url: https://bitbucket.org/multicoreware/x265_git.git
+        tag: '4.1'
+        commit: 1d117bed4747758b51bd2c124d738527e30392cb
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
+
+      # fix cmake build issue
+      # https://bitbucket.org/multicoreware/x265_git/commits/b354c009a60bcd6d7fc04014e200a1ee9c45c167
+      - type: patch
+        path: patches/x265-cmake_policy.patch
   - name: luajit
     no-autogen: true
     make-install-args:
