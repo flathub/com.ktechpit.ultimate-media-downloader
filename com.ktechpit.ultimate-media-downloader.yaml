@@ -78,6 +78,7 @@ modules:
     builddir: true
     subdir: source
     config-opts:
+      - '-DCMAKE_POLICY_VERSION_MINIMUM=3.5'
       - '-DCMAKE_BUILD_TYPE=Release'
       - '-DENABLE_CLI=OFF'
     sources:
