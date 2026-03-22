@@ -1,9 +1,9 @@
 app-id: com.ktechpit.ultimate-media-downloader
 runtime: org.kde.Platform
-runtime-version: 5.15-23.08
+runtime-version: 5.15-25.08
 sdk: org.kde.Sdk
 base: io.qt.qtwebengine.BaseApp
-base-version: 5.15-23.08
+base-version: 5.15-25.08
 command: ultimate-media-downloader
 finish-args:
   - --device=dri
@@ -184,9 +184,9 @@ modules:
       - type: file
         # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
         # also update build-command whenever update url
-        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_45.snap
+        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_51.snap
         only-arches:
           - x86_64
-        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_45.snap | sha256sum
-        sha256: acb84eedf22d01bb9fbf35c5f7f930d44e0df4e73c15aa63db89ca9986c43071
+        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_51.snap | sha256sum
+        sha256: ec646d39ced76d2a598426841580206a91cda7ebe7fc3e4b601f8035955c9c5a
 #END 2024-09-26
