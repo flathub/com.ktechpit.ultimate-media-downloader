@@ -1,79 +1,140 @@
 app-id: com.ktechpit.ultimate-media-downloader
-runtime: org.kde.Platform
-runtime-version: 5.15-25.08
-sdk: org.kde.Sdk
 base: io.qt.qtwebengine.BaseApp
-base-version: 5.15-25.08
+base-version: '6.10'
+runtime: org.kde.Platform
+runtime-version: '6.10'
+sdk: org.kde.Sdk
 command: ultimate-media-downloader
 finish-args:
-  - --device=dri
-
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-download
-  - --filesystem=xdg-music
-  - --filesystem=xdg-pictures
-  - --filesystem=xdg-videos
-
   - --share=network
   - --share=ipc
-
-  - --socket=pulseaudio
   - --socket=fallback-x11
   - --socket=wayland
-
+  - --socket=pulseaudio
+  - --device=dri
   - --env=PACKAGE_TYPE=flatpak
-  - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
-  - --env=QTWEBENGINE_DICTIONARIES_PATH=/app/qtwebengine_dictionaries
-
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
-  - --talk-name=com.canonical.indicator.application
-  - --talk-name=org.ayatana.indicator.application
-
   - --system-talk-name=org.freedesktop.GeoClue2
   - --system-talk-name=org.freedesktop.UPower.*
+
+cleanup:
+  - /include
+  - /lib/cmake
+  - /share/man
+  - /share/doc
+  - /lib/pkgconfig
 
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
 
-cleanup:
-  - /include
-  - /lib/pkgconfig
-
 modules:
   - shared-modules/squashfs-tools/squashfs-tools.json
-  - modules/mpv.yaml
 
-  - name: libgumbo
+  - name: libgumbo2
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://github.com/google/gumbo-parser/archive/v0.10.1.tar.gz
-        sha256: 28463053d44a5dfbc4b77bcf49c8cee119338ffa636cc17fc3378421d714efad
+        url: http://archive.ubuntu.com/ubuntu/pool/universe/g/gumbo-parser/gumbo-parser_0.12.0+dfsg.orig.tar.xz
+        sha256: 4a20bef3fc3b60067e6eac068205fb4e3071ef4fe8b96fc1315fd8e6a8a81aa9
     cleanup:
-      - /lib/pkgconfig
-      - /include
       - '*.a'
       - '*.la'
+
+  - name: luajit
+    no-autogen: true
+    cleanup:
+      - /bin
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+    sources:
+      - type: git
+        url: https://github.com/LuaJIT/LuaJIT.git
+        disable-shallow-clone: true
+        commit: 659a61693aa3b87661864ad0f12eee14c865cd7f
+      - type: shell
+        commands:
+          - sed -i 's|/usr/local|/app|' ./Makefile
+
+  - name: libass
+    config-opts:
+      - --disable-static
+    sources:
+      - type: archive
+        url: https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.xz
+        sha256: 78f1179b838d025e9c26e8fef33f8092f65611444ffa1bfc0cfac6a33511a05a
+
+  - name: libplacebo
+    buildsystem: meson
+    config-opts:
+      - -Dvulkan=disabled
+      - -Dshaderc=disabled
+    sources:
+      - type: git
+        url: https://github.com/haasn/libplacebo.git
+        tag: v7.360.1
+        commit: cee9b076f2c63104ccfd497fa79c39a867293ec4
+
+  - name: mpv
+    buildsystem: meson
+    build-options:
+      cflags: -DNDEBUG=1
+    config-opts:
+      - -Dlibmpv=false
+      - -Dbuild-date=false
+      - -Dpulse=enabled
+      - -Dalsa=enabled
+      - -Dmanpage-build=disabled
+      - -Dcdda=disabled
+      - -Ddvbin=disabled
+      - -Ddvdnav=disabled
+      - -Djavascript=disabled
+      - -Dlibarchive=disabled
+      - -Dlua=enabled
+      - -Dshaderc=disabled
+      - -Dvulkan=disabled
+    sources:
+      - type: archive
+        url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.41.0.tar.gz
+        sha256: ee21092a5ee427353392360929dc64645c54479aefdb5babc5cfbb5fad626209
 
   - name: ultimate-media-downloader
     buildsystem: simple
     build-commands:
-      - unsquashfs -no-progress mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW*.snap
+      - unsquashfs -no-progress *.snap
       - install -Dm755 squashfs-root/usr/bin/ultimate-media-downloader ${FLATPAK_DEST}/bin/ultimate-media-downloader
-      - install -Dm644 squashfs-root/meta/gui/icon.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.ktechpit.ultimate-media-downloader.png
-      - install -Dm644 squashfs-root/usr/share/applications/ultimate-media-downloader.desktop ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
-      - desktop-file-edit --set-icon=${FLATPAK_ID}  --set-comment="Download Media from Internet" ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
-      - install -Dm644 com.ktechpit.ultimate-media-downloader.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml
+      - cp -r squashfs-root/usr/share/icons ${FLATPAK_DEST}/share/
+      - install -Dm644 squashfs-root/usr/share/applications/com.ktechpit.ultimate-media-downloader.desktop ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
+      - desktop-file-edit --set-icon=${FLATPAK_ID} ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
+      - install -Dm644 squashfs-root/usr/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml
     sources:
-      - type: file
-        path: dist/linux/com.ktechpit.ultimate-media-downloader.metainfo.xml
-      - type: file
-        # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
-        # also update build-command whenever update url
-        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_51.snap
-        only-arches:
-          - x86_64
-        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_51.snap | sha256sum
-        sha256: ec646d39ced76d2a598426841580206a91cda7ebe7fc3e4b601f8035955c9c5a
+        # =========================
+        # x86_64 (amd64) – stable
+        # =========================
+        - type: file
+          # Get stable amd64 snap URL:
+          # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq -r '.["channel-map"][] | select(.channel.architecture=="amd64" and   .channel.risk=="stable" and .channel.track=="latest") | .download.url'
+          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_56.snap
+
+          # Get sha256:
+          # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_56.snap | sha256sum
+          sha256: 9753be1742f09b6ef35c5ba092b287816ee176154d006be27d7b96293565a8f4
+
+          only-arches:
+            - x86_64
+
+        # =========================
+        # arm64 (aarch64) – stable
+        # =========================
+        - type: file
+          # Get stable arm64 snap URL:
+          # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq -r '.["channel-map"][] | select(.channel.architecture=="arm64" and  .channel.risk=="stable" and .channel.track=="latest") | .download.url'
+          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_55.snap
+
+          # Get sha256:
+          # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_55.snap | sha256sum
+          sha256: 530fe7fe58b1c0c2294eba5759a642f091a0e7dec0a3eaba89268b3291ef41e2
+
+          only-arches:
+            - aarch64
