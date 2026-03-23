@@ -30,6 +30,7 @@ cleanup-commands:
 
 modules:
   - shared-modules/squashfs-tools/squashfs-tools.json
+  - deno.yaml
 
   - name: libgumbo2
     buildsystem: autotools
@@ -110,31 +111,21 @@ modules:
       - install -Dm644 squashfs-root/usr/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml
     sources:
         # =========================
-        # x86_64 (amd64) – stable
+        # x86_64 – stable
         # =========================
         - type: file
-          # Get stable amd64 snap URL:
-          # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq -r '.["channel-map"][] | select(.channel.architecture=="amd64" and   .channel.risk=="stable" and .channel.track=="latest") | .download.url'
-          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_56.snap
-
-          # Get sha256:
-          # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_56.snap | sha256sum
-          sha256: 9753be1742f09b6ef35c5ba092b287816ee176154d006be27d7b96293565a8f4
-
+          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_59.snap
+          sha256: 2af154d9bb6ab26b187f99a4f945a951ef2f5426caa80173f397f798c7ab0d29
           only-arches:
             - x86_64
 
         # =========================
-        # arm64 (aarch64) – stable
+        # aarch64 – stable
         # =========================
         - type: file
-          # Get stable arm64 snap URL:
-          # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq -r '.["channel-map"][] | select(.channel.architecture=="arm64" and  .channel.risk=="stable" and .channel.track=="latest") | .download.url'
-          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_55.snap
-
-          # Get sha256:
-          # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_55.snap | sha256sum
-          sha256: 530fe7fe58b1c0c2294eba5759a642f091a0e7dec0a3eaba89268b3291ef41e2
-
+          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_60.snap
+          sha256: daa09d50b3046aca82a4a943d7095c92c656d252809edd225171b2f45df6b95b
           only-arches:
-            - aarch64
+             - aarch64
+
+
