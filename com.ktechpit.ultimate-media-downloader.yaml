@@ -35,19 +35,11 @@ finish-args:
   - --system-talk-name=org.freedesktop.UPower.*
 
 cleanup-commands:
-  - mkdir -p /app/lib/ffmpeg
   - /app/cleanup-BaseApp.sh
 
 cleanup:
   - /include
   - /lib/pkgconfig
-
-add-extensions:
-  org.freedesktop.Platform.ffmpeg-full:
-    directory: 'lib/ffmpeg'
-    version: '23.08'
-    add-ld-path: '.'
-    autodelete: false
 
 modules:
   - shared-modules/squashfs-tools/squashfs-tools.json
