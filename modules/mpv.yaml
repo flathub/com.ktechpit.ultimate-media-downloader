@@ -13,7 +13,7 @@ config-opts:
   - -Ddvdnav=disabled
   - -Djavascript=disabled
   - -Dlibarchive=disabled
-  - -Dlua=disabled
+  - -Dlua=enabled
   - -Dshaderc=disabled
   - -Dvulkan=disabled
 sources:
