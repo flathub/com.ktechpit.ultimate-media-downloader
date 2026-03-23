@@ -30,6 +30,7 @@ cleanup-commands:
 
 modules:
   - shared-modules/squashfs-tools/squashfs-tools.json
+  - deno.yaml
 
   - name: libgumbo2
     buildsystem: autotools
