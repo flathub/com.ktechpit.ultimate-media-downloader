@@ -45,12 +45,12 @@ modules:
   - name: ultimate-media-downloader
     buildsystem: simple
     build-commands:
-      - unsquashfs -no-progress mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW*.snap
+      - unsquashfs -no-progress *.snap
       - install -Dm755 squashfs-root/usr/bin/ultimate-media-downloader ${FLATPAK_DEST}/bin/ultimate-media-downloader
-      - install -Dm644 squashfs-root/meta/gui/icon.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/com.ktechpit.ultimate-media-downloader.png
-      - install -Dm644 squashfs-root/usr/share/applications/ultimate-media-downloader.desktop ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
-      - desktop-file-edit --set-icon=${FLATPAK_ID}  --set-comment="Download Media from Internet" ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
-      - install -Dm644 com.ktechpit.ultimate-media-downloader.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml
+      - cp -r squashfs-root/usr/share/icons ${FLATPAK_DEST}/share/
+      - install -Dm644 squashfs-root/usr/share/applications/com.ktechpit.ultimate-media-downloader.desktop ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
+      - desktop-file-edit --set-icon=${FLATPAK_ID} ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
+      - install -Dm644 squashfs-root/usr/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml
     sources:
         # =========================
         # x86_64 (amd64) – stable
