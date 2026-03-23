@@ -1,45 +1,32 @@
 app-id: com.ktechpit.ultimate-media-downloader
-runtime: org.kde.Platform
-runtime-version: 5.15-25.08
-sdk: org.kde.Sdk
 base: io.qt.qtwebengine.BaseApp
-base-version: 5.15-25.08
+base-version: '6.10'
+runtime: org.kde.Platform
+runtime-version: '6.10'
+sdk: org.kde.Sdk
 command: ultimate-media-downloader
 finish-args:
-  - --device=dri
-
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-download
-  - --filesystem=xdg-music
-  - --filesystem=xdg-pictures
-  - --filesystem=xdg-videos
-
   - --share=network
   - --share=ipc
-
-  - --socket=pulseaudio
   - --socket=fallback-x11
   - --socket=wayland
-
+  - --socket=pulseaudio
+  - --device=dri
   - --env=PACKAGE_TYPE=flatpak
-  - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
-  - --env=QTWEBENGINE_DICTIONARIES_PATH=/app/qtwebengine_dictionaries
-
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
-  - --talk-name=com.canonical.indicator.application
-  - --talk-name=org.ayatana.indicator.application
-
   - --system-talk-name=org.freedesktop.GeoClue2
   - --system-talk-name=org.freedesktop.UPower.*
 
-cleanup-commands:
-  - /app/cleanup-BaseApp.sh
-
 cleanup:
   - /include
+  - /lib/cmake
+  - /share/man
+  - /share/doc
   - /lib/pkgconfig
+
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
 
 modules:
   - shared-modules/squashfs-tools/squashfs-tools.json
@@ -52,8 +39,6 @@ modules:
         url: https://github.com/google/gumbo-parser/archive/v0.10.1.tar.gz
         sha256: 28463053d44a5dfbc4b77bcf49c8cee119338ffa636cc17fc3378421d714efad
     cleanup:
-      - /lib/pkgconfig
-      - /include
       - '*.a'
       - '*.la'
 
@@ -67,13 +52,32 @@ modules:
       - desktop-file-edit --set-icon=${FLATPAK_ID}  --set-comment="Download Media from Internet" ${FLATPAK_DEST}/share/applications/com.ktechpit.ultimate-media-downloader.desktop
       - install -Dm644 com.ktechpit.ultimate-media-downloader.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.ktechpit.ultimate-media-downloader.metainfo.xml
     sources:
-      - type: file
-        path: dist/linux/com.ktechpit.ultimate-media-downloader.metainfo.xml
-      - type: file
-        # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq '."channel-map"' | jq '.[]' | jq '[."download"."url"]' | grep -m1 https | tr -d ' ' | tr -d '"'
-        # also update build-command whenever update url
-        url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_51.snap
-        only-arches:
-          - x86_64
-        # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_51.snap | sha256sum
-        sha256: ec646d39ced76d2a598426841580206a91cda7ebe7fc3e4b601f8035955c9c5a
+        # =========================
+        # x86_64 (amd64) – stable
+        # =========================
+        - type: file
+          # Get stable amd64 snap URL:
+          # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq -r '.["channel-map"][] | select(.channel.architecture=="amd64" and   .channel.risk=="stable" and .channel.track=="latest") | .download.url'
+          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_56.snap
+
+          # Get sha256:
+          # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_56.snap | sha256sum
+          sha256: 9753be1742f09b6ef35c5ba092b287816ee176154d006be27d7b96293565a8f4
+
+          only-arches:
+            - x86_64
+
+        # =========================
+        # arm64 (aarch64) – stable
+        # =========================
+        - type: file
+          # Get stable arm64 snap URL:
+          # curl -H 'Snap-Device-Series: 16' https://api.snapcraft.io/v2/snaps/info/ultimate-media-downloader | jq -r '.["channel-map"][] | select(.channel.architecture=="arm64" and  .channel.risk=="stable" and .channel.track=="latest") | .download.url'
+          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_55.snap
+
+          # Get sha256:
+          # curl -Ls https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_55.snap | sha256sum
+          sha256: 530fe7fe58b1c0c2294eba5759a642f091a0e7dec0a3eaba89268b3291ef41e2
+
+          only-arches:
+            - aarch64
