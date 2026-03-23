@@ -43,6 +43,7 @@ modules:
 
   - name: luajit
     no-autogen: true
+    buildsystem: simple
     cleanup:
       - /bin
       - /include
@@ -53,6 +54,9 @@ modules:
         url: https://github.com/LuaJIT/LuaJIT.git
         disable-shallow-clone: true
         commit: 659a61693aa3b87661864ad0f12eee14c865cd7f
+      - type: shell
+        commands:
+          - sed -i 's|/usr/local|/app|' ./Makefile
 
   - name: libass
     config-opts:
