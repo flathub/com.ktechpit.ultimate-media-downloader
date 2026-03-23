@@ -31,6 +31,7 @@ cleanup-commands:
 modules:
   - shared-modules/squashfs-tools/squashfs-tools.json
   - modules/mpv.yaml
+  - modules/lua-jit.yaml
 
   - name: libgumbo2
     buildsystem: autotools
