@@ -18,6 +18,13 @@ finish-args:
   - --system-talk-name=org.freedesktop.GeoClue2
   - --system-talk-name=org.freedesktop.UPower.*
 
+  # download directories for convenience
+  - --filesystem=xdg-desktop
+  - --filesystem=xdg-download
+  - --filesystem=xdg-music
+  - --filesystem=xdg-pictures
+  - --filesystem=xdg-videos
+
 cleanup:
   - /include
   - /lib/cmake
