@@ -1,8 +1,8 @@
 app-id: com.ktechpit.ultimate-media-downloader
 base: io.qt.qtwebengine.BaseApp
-base-version: '6.10'
+base-version: '6.11'
 runtime: org.kde.Platform
-runtime-version: '6.10'
+runtime-version: '6.11'
 sdk: org.kde.Sdk
 command: ultimate-media-downloader
 finish-args:
@@ -121,8 +121,8 @@ modules:
         # x86_64 – stable
         # =========================
         - type: file
-          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_66.snap
-          sha256: 5099e97e1974a6bb147f59c4a22d4c235fe2b7c1a55da78eabae9cc91d3c5b02
+          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_67.snap
+          sha256: c6bbbd40c88d0209f4551b912f5c858893f6235e904a3ca2c1bb30351f12d09d
           only-arches:
             - x86_64
 
@@ -131,8 +131,8 @@ modules:
         # aarch64 – stable
         # =========================
         - type: file
-          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_65.snap
-          sha256: 03d272b010a5e1b99b5eaf1b3a43c51353fd69bfdd375a2439bfddd79097df99
+          url: https://api.snapcraft.io/api/v1/snaps/download/mqCImuZBihW5Od6DMGOZ3BQqwLN9i3LW_68.snap
+          sha256: 72a3816ea044fe6340874f62513a8598cfaa1e7e8fba73784954d689e45e2926
           only-arches:
             - aarch64
 
